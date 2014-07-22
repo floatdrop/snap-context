@@ -1,9 +1,7 @@
 var Context = Object.create(null);
 
 Context.snapshot = function snapshot(ctx) {
-    var newCtx = {};
-    newCtx.prototype = ctx;
-    return newCtx;
+    return Object.create(ctx);
 };
 
 Context.restore = function restore(ctx) {
