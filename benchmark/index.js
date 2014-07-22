@@ -4,7 +4,6 @@ var Context = require('..');
 
 suite('Performance', function () {
     // bench('Handwritten version', function () {
-
     // });
 
     bench('Object.create', function () {

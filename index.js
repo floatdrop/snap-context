@@ -5,7 +5,7 @@ Context.snapshot = function snapshot(ctx) {
 };
 
 Context.restore = function restore(ctx) {
-    return ctx.prototype;
+    return ctx.prototype || ctx;
 };
 
 module.exports = Context;
