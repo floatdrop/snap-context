@@ -1,11 +1,33 @@
-var Context = Object.create(null);
+var Context = function () {
+    this.clean = true;
+    this.stack = [{}];
+}
 
-Context.snapshot = function snapshot(ctx) {
-    return Object.create(ctx);
+Context.prototype.get = function get(key) {
+    var i = this.stack.length - 1;
+    // if (this.stack[i][key] !== undefined) { return this.stack[i][key]; }
+    while (i > 0 && this.stack[i][key] === undefined) {
+        i--;
+    }
+    return this.stack[i][key];
 };
 
-Context.restore = function restore(ctx) {
-    return ctx.prototype || ctx;
+Context.prototype.set = function set(key, value) {
+    if (!this.clean) {
+        this.stack.push({});
+        this.clean = true;
+    }
+    this.stack[this.stack.length - 1][key] = value;
+}
+
+Context.prototype.snapshot = function snapshot(ctx) {
+    this.clean = false;
+};
+
+Context.prototype.restore = function restore(ctx) {
+    if (this.stack.length > 1) {
+        this.stack.pop();
+    }
 };
 
 module.exports = Context;
