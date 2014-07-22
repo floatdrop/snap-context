@@ -3,14 +3,11 @@
 var Context = require('..');
 
 suite('Performance', function () {
-    bench('Inlined version', function () {
-        var ctx = {};
-        var newCtx = {};
-        newCtx.prototype = ctx;
-        newCtx.key = 'value';
-    });
+    // bench('Handwritten version', function () {
 
-    bench('Context version', function () {
+    // });
+
+    bench('Object.create', function () {
         var ctx = {};
         ctx = Context.snapshot(ctx);
         ctx.key = 'value';
