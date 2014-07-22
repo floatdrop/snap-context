@@ -1,5 +1,5 @@
 {
-  "name": "protoscop",
+  "name": "proto-context",
   "version": "0.0.1",
   "description": "Prototype-based context handling",
   "main": "index.js",
