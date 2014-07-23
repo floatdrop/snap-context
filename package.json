@@ -1,6 +1,6 @@
 {
   "name": "snap-context",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Snapshot and restore context",
   "main": "array.js",
   "directories": {
