@@ -1,8 +1,8 @@
 {
-  "name": "proto-context",
+  "name": "snap-context",
   "version": "0.0.3",
-  "description": "Prototype-based context handling",
-  "main": "index.js",
+  "description": "Snapshot and restore context",
+  "main": "array.js",
   "directories": {
     "test": "test"
   },
@@ -27,6 +27,7 @@
   "devDependencies": {
     "matcha": "^0.5.0",
     "mocha": "^1.20.1",
-    "should": "^4.0.4"
+    "should": "^4.0.4",
+    "just-a-stack": "^0.1.0"
   }
 }

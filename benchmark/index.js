@@ -1,20 +1,23 @@
 /* global suite, bench */
 
-var Context = require('..');
 require('should');
 
-suite('Performance', function () {
-    bench('Object.create', function () {
-        var ctx = {};
-        ctx.block = 'html';
-        var newCtx = Object.create(ctx);
-        ctx.block.should.equal('html');
-    });
+function benchStack(stack) {
+    return function () {
+        stack.set('block', 'html');
+        stack.snapshot();
+        stack.get('block').should.equal('html');
+        stack.restore();
+    };
+}
 
-    bench('Stack on array', function () {
-        var ctx = new Context();
-        ctx.set('block', 'html');
-        ctx.snapshot();
-        ctx.get('block').should.equal('html');
-    });
+suite('Performance', function () {
+    var ArrayContext = require('../array.js');
+    bench('Stack on array', benchStack(new ArrayContext()));
+
+    var ListContext = require('../list.js');
+    bench('Stack on list', benchStack(new ListContext()));
+
+    var ProtoContext = require('../proto.js');
+    bench('Stack on object.prototype', benchStack(new ProtoContext()));
 });

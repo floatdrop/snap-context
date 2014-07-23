@@ -1,11 +1,10 @@
 var Context = function () {
     this.clean = true;
     this.stack = [{}];
-}
+};
 
 Context.prototype.get = function get(key) {
     var i = this.stack.length - 1;
-    // if (this.stack[i][key] !== undefined) { return this.stack[i][key]; }
     while (i > 0 && this.stack[i][key] === undefined) {
         i--;
     }
@@ -18,7 +17,7 @@ Context.prototype.set = function set(key, value) {
         this.clean = true;
     }
     this.stack[this.stack.length - 1][key] = value;
-}
+};
 
 Context.prototype.snapshot = function snapshot(ctx) {
     this.clean = false;

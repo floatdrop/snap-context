@@ -1,4 +1,4 @@
-# proto-context [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url] [![Coveralls Status][coveralls-image]][coveralls-url]
+# snap-context [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
 
 > Manage context with ease
 
@@ -6,33 +6,53 @@
 
 ```js
 var Context = require('proto-context');
-var ctx = {};
+var ctx = new Context();
 
-ctx.value = 'first version';  // console.log(ctx.value) -> 'first version'
-ctx = Context.snapshot(ctx);
-ctx.value = 'second version'; // console.log(ctx.value) -> 'second version'
-ctx = Context.restore(ctx);
-console.log(ctx.value); // -> 'first version' 
+ctx.set('value', 'first version');  // console.log(ctx.get('value')) -> 'first version'
+ctx.snapshot();
+ctx.set('value', 'second version'); // console.log(ctx.get('value')) -> 'second version'
+ctx.restore();
+console.log(ctx.get('value')); // -> 'first version' 
 ```
 
 ## API
 
-## Context.snapshot(ctx)
+## new Context
+
+Creates context object with methods:
+
+### Context.set(key, value)
+
+Sets key for value in current context.
+
+### Context.get(key)
+
+Gets value for key in current (or previous) context.
+
+### Context.snapshot(ctx)
 
 Creates new Object and add it to `ctx` prototype.
 
-## Context.restore(ctx)
+### Context.restore(ctx)
 
 Removes created Object from prototype chain of ctx.
 
-[npm-url]: https://npmjs.org/package/proto-context
-[npm-image]: http://img.shields.io/npm/v/proto-context.svg
+## Benchmark results
 
-[travis-url]: https://travis-ci.org/floatdrop/proto-context
-[travis-image]: http://img.shields.io/travis/floatdrop/proto-context.svg
+Benchmarking set -> snapshot -> get -> restore pattern:
 
-[depstat-url]: https://david-dm.org/floatdrop/proto-context
-[depstat-image]: https://david-dm.org/floatdrop/proto-context.svg?theme=shields.io
+```js
+                      Performance
+       1,133,011 op/s » Stack on array
+         668,539 op/s » Stack on list
+             645 op/s » Stack on object.prototype
+```
 
-[coveralls-url]: https://coveralls.io/r/floatdrop/proto-context
-[coveralls-image]: http://img.shields.io/coveralls/floatdrop/proto-context/master.svg
+[npm-url]: https://npmjs.org/package/snap-context
+[npm-image]: http://img.shields.io/npm/v/snap-context.svg
+
+[travis-url]: https://travis-ci.org/floatdrop/snap-context
+[travis-image]: http://img.shields.io/travis/floatdrop/snap-context.svg
+
+[depstat-url]: https://david-dm.org/floatdrop/snap-context
+[depstat-image]: https://david-dm.org/floatdrop/snap-context.svg?theme=shields.io
