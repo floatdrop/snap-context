@@ -42,10 +42,17 @@ Removes created Object from prototype chain of ctx.
 Benchmarking set -> snapshot -> get -> restore pattern:
 
 ```js
-                      Performance
-       1,133,011 op/s » Stack on array
-         668,539 op/s » Stack on list
-             645 op/s » Stack on object.prototype
+                      Short stack
+         978,292 op/s » Stack on array
+         596,183 op/s » Stack on list
+
+                      Long stack
+         250,730 op/s » Stack on array
+         253,066 op/s » Stack on list
+
+                      Very long stack
+          33,710 op/s » Stack on array
+          37,891 op/s » Stack on list
 ```
 
 [npm-url]: https://npmjs.org/package/snap-context
